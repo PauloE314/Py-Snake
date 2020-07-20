@@ -1,7 +1,9 @@
 import pygame
+from pygame.font import Font
 from pygame.time import Clock
 from pygame.locals import *
-
+from lib.exceptions import FontNameError, FontNotFoundError
+from lib.TextManager import TextManager
 
 class BaseGame:
     """
@@ -12,6 +14,7 @@ class BaseGame:
     clock = None
     __fps = None
     font = None
+    text_manager: TextManager = None
 
     def __init__(self, configs):
         # Configurações de tempo
@@ -19,6 +22,7 @@ class BaseGame:
         self.__fps = configs['FPS']
         self.screen = pygame.display.set_mode(configs["DIMENTIONS"])
         self.configs = configs
+        self.text_manager = TextManager()
 
     def setup(self):
         """
