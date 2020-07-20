@@ -10,7 +10,7 @@ class Text:
     """
     Classe base para textos
     """
-    content: str = None
+    __content: str = None
     color: tuple = None
     pygame_text_object = None
     rect = None
@@ -19,17 +19,17 @@ class Text:
         """
         Cria um novo texto
         """
-        self.content = text
+        self.__content = text
         self.color = color
         self.font = font
-        self.pygame_text_object = self.font.render(self.content, True, self.color)
+        self.pygame_text_object = self.font.render(self.__content, True, self.color)
         # Posição
         self.rect: Rect = self.pygame_text_object.get_rect()
         self.rect[0] = position[0]
         self.rect[1] = position[1]
 
     def __str__(self):
-        return self.content
+        return self.__content
 
     def update(self, text: str = None, color: tuple = None, position: tuple = None):
         """
@@ -37,7 +37,7 @@ class Text:
         """
         # Update de texto
         if text:
-            self.content = text
+            self.__content = text
         # Update de cor
         if color:
             self.color = color
@@ -46,7 +46,7 @@ class Text:
             self.rect[0] = position[0]
             self.rect[1] = position[1]
         
-        self.pygame_text_object = self.font.render(self.content, True, self.color)
+        self.pygame_text_object = self.font.render(self.__content, True, self.color)
 
     def render(self, surface: Surface):
         """
