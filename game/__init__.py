@@ -21,6 +21,8 @@ class SnakeGame(BaseGame):
     def main(self):
         # Checa a colisão da cobra e frutinha
         if self.snake.head.rect.colliderect(self.fruit.rect):
+            # Cresce a cobrinha
+            self.snake.increase()
             # Cria uma nova frutinha
             self.fruit = Fruit({**self.configs['FRUITS'], 'limits': self.configs['GAME_LIMITS']})
             # Adiciona os pontos
@@ -29,7 +31,14 @@ class SnakeGame(BaseGame):
             self.score.update(text = f'SCORE {self.points}')
 
         # Checa colisão com parede
-        if self.snake.head.rect.colliderect(self)
+        if self.snake.head.rect.collidelist(self.walls_group.sprites()) != -1:
+            self.end_game()
+
+        # Checa colisão consigo mesmo
+        if self.snake.head.rect.collidelist(self.snake.body_rects) != -1:
+            self.end_game()
+
+            
         
 
     def render(self):
@@ -76,7 +85,6 @@ class SnakeGame(BaseGame):
 
         # Gera cobrinha
         self.snake = Snake(self.configs['SNAKE'])
-
 
 
 

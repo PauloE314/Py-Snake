@@ -166,3 +166,9 @@ class Snake:
         # # Renderiza o corpo
         for ball in reversed(self.body):
             surface.blit(ball.image, ball.rect)
+
+
+    @property
+    def body_rects(self):
+        rect_body_list = list(map(lambda ball: ball.rect, self.body))
+        return rect_body_list

@@ -7,7 +7,7 @@ GAME_SETTINGS = {
     "WIDTH": HEIGHT,
     "HEIGHT": WIDTH,
     "DIMENTIONS": (WIDTH, HEIGHT),
-    "FPS": 40,
+    "FPS": 15,
     "SCORE": {
         'path': os.path.join('resources', 'fonts', '8-BIT WONDER.TTF'),
         'size': 15,
@@ -28,7 +28,7 @@ GAME_SETTINGS = {
     },
     "SNAKE": {
         "initial_position": (255, 255),
-        "initial_size": 10,
+        "initial_size": 5,
         "speed": 5,
         "dimentions": (5, 5),
         "color": (255, 255, 255)

@@ -15,6 +15,8 @@ class BaseGame:
     __fps = None
     font = None
     text_manager: TextManager = None
+    __game_ended = False
+
 
     def __init__(self, configs):
         # Configurações de tempo
@@ -48,15 +50,26 @@ class BaseGame:
         """
         pass
 
-    def run(self):
+    def init(self):
+        """
+        Inicia o jogo
+        """
         pygame.init()
+
+
+    def run(self):
         """
         Roda o setup do jogo e o inicia
-        """
+        """        
         self.setup()
 
         # Loop do jogo
         while True:
+            # Checa se jogo ainda está ocorrendo
+            if self.__game_ended == True:
+                pygame.quit()
+                return
+
             self.clock.tick(self.__fps)
             # Checa os eventos
             for event in pygame.event.get():
@@ -74,3 +87,11 @@ class BaseGame:
             self.render()
             # Atualiza a tela
             pygame.display.update()
+
+    
+
+    def end_game(self):
+        """
+        Termina o jogo
+        """
+        self.__game_ended = True
