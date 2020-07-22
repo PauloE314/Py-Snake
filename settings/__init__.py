@@ -3,18 +3,43 @@ import os
 WIDTH = 600
 HEIGHT = 600
 GAME_BLOCK = 10
+FONT_8_BITS = os.path.join('resources', 'fonts', '8-BIT WONDER.TTF')
 
 GAME_SETTINGS = {
     "WIDTH": HEIGHT,
     "HEIGHT": WIDTH,
     "DIMENSIONS": (WIDTH, HEIGHT),
+    "APPLICATION_TITLE": "SNAKE",
     "FPS": 15,
     "BACKGROUND": (0, 0, 75),
-    "SCORE": {
-        'path': os.path.join('resources', 'fonts', '8-BIT WONDER.TTF'),
-        'size': 15,
-        'position': (40, 20),
-        'color': (255, 255, 255)
+    "FONTS": {
+        "BIG_FONT": {
+            "path": FONT_8_BITS,
+            "name": "big_font",
+            "size": 40,
+        },
+        "SMALL_FONT": {
+            "path": FONT_8_BITS,
+            "name": "small_font",
+            "size": 15
+        }
+    },
+    "TEXTS": {
+        "TITLE": {
+            "position": (WIDTH // 2, HEIGHT // 2 - 100),
+            "color": (255, 255, 255),
+            'font': 'big_font'
+        },
+        "SCORE": {
+            "position": (40, 20),
+            "color": (255, 255, 255),
+            "font": "small_font"
+        },
+        "START_GAME_MESSAGE": {
+            "position": (WIDTH // 2, HEIGHT // 2),
+            "color": (255, 255, 255),
+            "font": "small_font"            
+        }
     },
     "GAME_LIMITS": {
         "x": (100, WIDTH - 100),

@@ -14,6 +14,10 @@ class GameOver(BaseGameState):
     Estado de fim de jogo
     """
     name = "game_over"
+    
+    def setup(self):
+        pass
+
 
     def main(self):
         pass           
@@ -26,6 +30,3 @@ class GameOver(BaseGameState):
     def events(self, event):
         pass
         
-
-    def setup(self):
-        pass

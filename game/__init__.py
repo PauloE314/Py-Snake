@@ -3,25 +3,38 @@ from pygame.locals import *
 from pygame.font import Font
 from pygame.sprite import Group
 from lib.base_game import BaseGame
+from game.entities.states.menu import Menu
 from game.entities.states.playing import PlayingState
+from game.entities.states.game_over import GameOver
 from settings import GAME_SETTINGS
 
+
+"""
+{
+    "font_size": 15,
+    "path": "...",
+    "font_name": "lorem"
+}
+"""
 
 class SnakeGame(BaseGame):
     """
     Jogo da cobrinha que todos amamos
     """
     states = [
-        PlayingState
+        Menu,
+        PlayingState,
+        GameOver
     ]
 
-    initial_state = 'playing'
+    initial_state = 'menu'
 
     def setup(self):
         # Seta o nome da aplicação
         pygame.display.set_caption("Snake")
 
-        # Fonte do score
-        score_configs = self.configs['SCORE']
-        self.text_manager.new_font('score_font', score_configs['path'], score_configs['size'])
-        
+        # Pega fontes
+        fonts = list(self.configs['FONTS'].values())
+
+        # Registrar fontes
+        self.text_manager.register_fonts(fonts)

@@ -67,11 +67,11 @@ class PlayingState(BaseGameState):
 
     def setup(self):
         # Cria placar
-        score_configs = self.configs['SCORE']
+        score_configs = self.configs['TEXTS']['SCORE']
         self.score = self.text_manager.new_text(
             text='SCORE 0',
             text_name='score',
-            font_name='score_font',
+            font_name='small_font',
             position=score_configs['position'],
             color=score_configs['color']
         )

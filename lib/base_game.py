@@ -60,18 +60,20 @@ class BaseGame:
         pygame.init()
         # Dá o setup inicial
         self.setup()
+        
         # Carrega os estados do jogo
         self.__real_state_list = list(
             map(lambda cls: cls(self.configs, self.text_manager), self.states)
         )
         
+        # Pega o estado atual
+        self.__current_state = self.get_state(self.initial_state)
+
         # Loop do jogo
         while True:
-            # Pega o estado atual
-            current_state = self.get_state(self.initial_state)
-
-            current_state.setup()
-
+            # Setup
+            self.__current_state.setup()
+            
             # Executa seu ciclo de vida até que seja chamada a uma mudança de estado
             try:
                 while True:
@@ -83,13 +85,13 @@ class BaseGame:
                             self.end_game()
                             return
                         # Executa o event handler do estado atual
-                        current_state.events(event)
+                        self.__current_state.events(event)
 
                     # Função principal
-                    current_state.main()
+                    self.__current_state.main()
 
                     # Renderiza mudanças do estado atual na tela
-                    current_state.render(self.screen)
+                    self.__current_state.render(self.screen)
 
                     # Atualiza o frame
                     pygame.display.update()
@@ -98,7 +100,7 @@ class BaseGame:
             except NextStateException as next_state:
                 pygame.display.update()
                 # Tenta troca o estado
-                self.__current_state = self.get_state(next_state)
+                self.__current_state = self.get_state(next_state.message)
 
             # Termina o jogo
             except EndGameException:
@@ -125,5 +127,5 @@ class BaseGame:
             if state.name == name:
                 return state
         # Caso não encontre, retorna erro
-        raise StateDoesNotExist(next_state)
+        raise StateDoesNotExist(name)
                 

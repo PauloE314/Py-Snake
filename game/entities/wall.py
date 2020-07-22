@@ -10,7 +10,7 @@ class Wall(Sprite):
         # Inicia o sprite
         Sprite.__init__(self)
 
-        self.image = Surface(configs['demensions'])
+        self.image = Surface(configs['dimensions'])
         self.image.fill(configs['color'])
         # Posição
         self.rect = self.image.get_rect()

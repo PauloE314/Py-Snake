@@ -14,7 +14,7 @@ class SnakeBody:
 
     def __init__(self, configs, position, head=None):
         # Armazena o quadrado
-        self.image = Surface(configs['demensions'])
+        self.image = Surface(configs['dimensions'])
         # Configura a posição
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
@@ -39,10 +39,10 @@ class Snake:
     def __init__(self, configs):
         # Inicia o sprite
         initial_size = configs['initial_size'] if configs['initial_size'] < 20 else 20
-        demensions = configs['demensions']
+        dimensions = configs['dimensions']
         initial_position = (
-            (configs['initial_position'][0] // demensions[0]) * demensions[0],
-            (configs['initial_position'][1] // demensions[1]) * demensions[1],
+            (configs['initial_position'][0] // dimensions[0]) * dimensions[0],
+            (configs['initial_position'][1] // dimensions[1]) * dimensions[1],
         )
 
         self.configs = configs
@@ -86,7 +86,7 @@ class Snake:
         """
         Aumenta o camanho da cobra
         """
-        ball_width, ball_height = self.configs['demensions']
+        ball_width, ball_height = self.configs['dimensions']
 
         # Certifica que a cobra está em um dos eixos
         if self.__x_speed and self.__y_speed:
