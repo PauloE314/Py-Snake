@@ -3,6 +3,7 @@ from pygame.locals import *
 from pygame.font import Font
 from pygame.sprite import Group
 from lib.game_state import BaseGameState
+from lib.text_manager import Text
 from game.entities.fruit import Fruit
 from game.entities.wall import Wall
 from game.entities.snake import Snake
@@ -14,6 +15,7 @@ class PlayingState(BaseGameState):
     Estado de jogo principal
     """
     name = "playing"
+    score: Text = None
     points: int = 0
     fruit: Fruit = None
     walls_group: Group = None
@@ -33,11 +35,11 @@ class PlayingState(BaseGameState):
 
         # Checa colisão com parede
         if self.snake.head.rect.collidelist(self.walls_group.sprites()) != -1:
-            self.close_window()
+            self.change_state('game_over')
 
         # Checa colisão consigo mesmo
         if self.snake.head.rect.collidelist(self.snake.body_rect) != -1:
-            self.close_window()
+            self.change_state('game_over')
 
             
         
@@ -66,6 +68,7 @@ class PlayingState(BaseGameState):
         
 
     def setup(self):
+        self.reset()
         # Cria placar
         score_configs = self.configs['TEXTS']['SCORE']
         self.score = self.text_manager.new_text(
@@ -88,7 +91,15 @@ class PlayingState(BaseGameState):
 
         # print(self.screen)
 
-
+    def reset(self):
+        """
+        Reseta as configurações do jogo
+        """
+        self.points = 0
+        self.fruit = None
+        self.walls_group = None
+        self.snake = None
+        self.score = None
 
 
 

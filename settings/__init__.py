@@ -11,7 +11,7 @@ GAME_SETTINGS = {
     "DIMENSIONS": (WIDTH, HEIGHT),
     "APPLICATION_TITLE": "SNAKE",
     "FPS": 15,
-    "BACKGROUND": (0, 0, 75),
+    "BACKGROUND": (0, 0, 0),
     "FONTS": {
         "BIG_FONT": {
             "path": FONT_8_BITS,
@@ -37,8 +37,18 @@ GAME_SETTINGS = {
         },
         "START_GAME_MESSAGE": {
             "position": (WIDTH // 2, HEIGHT // 2),
-            "color": (255, 255, 255),
+            "color": (150, 150, 150),
             "font": "small_font"            
+        },
+        "GAME_OVER": {
+            "position": (WIDTH // 2, HEIGHT // 2 - 100),
+            "color": (255, 255, 255),
+            "font": "big_font"            
+        },
+        "TRY_AGAIN": {
+            "position": (WIDTH // 2, HEIGHT // 2),
+            "color": (150, 150, 150),
+            "font": "small_font"
         }
     },
     "GAME_LIMITS": {
