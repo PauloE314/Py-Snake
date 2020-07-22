@@ -36,7 +36,7 @@ class BaseGame:
         self.clock = Clock()
         self.__fps = configs['FPS']
         # Configuração de tela
-        self.screen = pygame.display.set_mode(configs["DIMENTIONS"])
+        self.screen = pygame.display.set_mode(configs["DIMENSIONS"])
         # Salva configurações
         self.configs = configs
         # Configurações de texto
@@ -78,7 +78,7 @@ class BaseGame:
                     self.clock.tick(self.__fps)
                     # Eventos
                     for event in pygame.event.get():
-                        # Saido do jogo
+                        # Saído do jogo
                         if event.type == QUIT:
                             self.end_game()
                             return

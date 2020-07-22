@@ -11,7 +11,7 @@ from game.entities.snake import Snake
 
 class PlayingState(BaseGameState):
     """
-    Estado de jogo printipal
+    Estado de jogo principal
     """
     name = "playing"
     points: int = 0
@@ -36,7 +36,7 @@ class PlayingState(BaseGameState):
             self.close_window()
 
         # Checa colisão consigo mesmo
-        if self.snake.head.rect.collidelist(self.snake.body_rects) != -1:
+        if self.snake.head.rect.collidelist(self.snake.body_rect) != -1:
             self.close_window()
 
             
@@ -96,7 +96,7 @@ def generate_walls(walls_group, configs):
     """
     Gera as paredes da aplicação
     """
-    wall_width, wall_heigh = configs['WALLS']['dimentions']
+    wall_width, wall_heigh = configs['WALLS']['dimensions']
     x_limit_begin, x_limit_end = configs['GAME_LIMITS']['x']
     y_limit_begin, y_limit_end = configs['GAME_LIMITS']['y']
     # Percorre todos os cantos possíveis

@@ -33,7 +33,7 @@ class Text:
 
     def update(self, text: str = None, color: tuple = None, position: tuple = None):
         """
-        Atualiza texto criado previamente em uma dada superficie
+        Atualiza texto criado previamente em uma dada superfície
         """
         # Update de texto
         if text:

@@ -12,7 +12,7 @@ class Fruit:
 
     def __init__(self, configs: dict):        
         # Cria a imagem
-        self.image = Surface(configs['dimentions'])
+        self.image = Surface(configs['demensions'])
         self.image.fill(configs['color'])
         self.rect = self.image.get_rect()
 
@@ -21,12 +21,12 @@ class Fruit:
         self.rect.x = (randint(
             configs['limits']['x'][0] + 10,
             configs['limits']['x'][1] - 10
-        ) // configs['dimentions'][0]) * configs['dimentions'][0]
+        ) // configs['demensions'][0]) * configs['dimensions'][0]
         # y
         self.rect.y = (randint(
             configs['limits']['y'][0] + 10,
             configs['limits']['y'][1] - 10
-        ) // configs['dimentions'][1]) * configs['dimentions'][1]
+        ) // configs['demensions'][1]) * configs['demensions'][1]
 
 
 

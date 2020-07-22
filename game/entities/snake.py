@@ -14,7 +14,7 @@ class SnakeBody:
 
     def __init__(self, configs, position, head=None):
         # Armazena o quadrado
-        self.image = Surface(configs['dimentions'])
+        self.image = Surface(configs['demensions'])
         # Configura a posição
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
@@ -39,10 +39,10 @@ class Snake:
     def __init__(self, configs):
         # Inicia o sprite
         initial_size = configs['initial_size'] if configs['initial_size'] < 20 else 20
-        dimentions = configs['dimentions']
+        demensions = configs['demensions']
         initial_position = (
-            (configs['initial_position'][0] // dimentions[0]) * dimentions[0],
-            (configs['initial_position'][1] // dimentions[1]) * dimentions[1],
+            (configs['initial_position'][0] // demensions[0]) * demensions[0],
+            (configs['initial_position'][1] // demensions[1]) * demensions[1],
         )
 
         self.configs = configs
@@ -86,7 +86,7 @@ class Snake:
         """
         Aumenta o camanho da cobra
         """
-        ball_width, ball_height = self.configs['dimentions']
+        ball_width, ball_height = self.configs['demensions']
 
         # Certifica que a cobra está em um dos eixos
         if self.__x_speed and self.__y_speed:
@@ -159,7 +159,7 @@ class Snake:
 
     def draw(self, surface: Surface):
         """
-        Renderiza toda a cobra na superficie
+        Renderiza toda a cobra na superfície
         """
         # Renderiza a cabeça
         surface.blit(self.head.image, self.head.rect)
@@ -169,6 +169,6 @@ class Snake:
 
 
     @property
-    def body_rects(self):
+    def body_rect(self):
         rect_body_list = list(map(lambda ball: ball.rect, self.body))
         return rect_body_list
