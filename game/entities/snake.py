@@ -4,13 +4,6 @@ from pygame.surface import Surface
 from typing import List, Tuple
 from lib.exceptions import SnakeOutOfAxis
 
-"""
-{
-    "initial_position": (255, 255),
-    "initial_size": 3,
-    "speed": 10
-}
-"""
 
 class SnakeBody:
     """
@@ -19,14 +12,15 @@ class SnakeBody:
     image: Surface = None
     rect = None
 
-    def __init__(self, configs, position):
+    def __init__(self, configs, position, head=None):
         # Armazena o quadrado
         self.image = Surface(configs['dimentions'])
-        self.image.fill(configs['color'])
         # Configura a posição
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
         self.rect.y = position[1]
+
+        self.image.fill(configs['body_color'])
 
     def __repr__(self):
         return f"<Snake Body [x: {self.rect.x}, y: {self.rect.y}]>"
@@ -45,16 +39,20 @@ class Snake:
     def __init__(self, configs):
         # Inicia o sprite
         initial_size = configs['initial_size'] if configs['initial_size'] < 20 else 20
-        initial_position = configs['initial_position']
         dimentions = configs['dimentions']
+        initial_position = (
+            (configs['initial_position'][0] // dimentions[0]) * dimentions[0],
+            (configs['initial_position'][1] // dimentions[1]) * dimentions[1],
+        )
+
         self.configs = configs
         # Seta a velocidade
         self.__default_speed = configs['speed']
         self.__x_speed = -self.__default_speed
         self.__y_speed = 0
         # Cria a cabeça da cobra
-        self.head = SnakeBody(configs, initial_position)
-        self.head.image.fill(configs['color'])
+        self.head = SnakeBody(configs, initial_position, head=True)
+        self.head.image.fill(configs['head_color'])
         # Cria o corpo inicial da cobra
         self.body = []
         for i in range(initial_size):
@@ -99,9 +97,11 @@ class Snake:
  
         # Cria uma nova cabeça
         new_head = SnakeBody(
-            self.configs, (self.head.rect.x + x_diff, self.head.rect.y + y_diff)
+            self.configs, (self.head.rect.x + x_diff, self.head.rect.y + y_diff), head=True
         )
+        new_head.image.fill(self.configs['head_color'])
         # Anexa a cabeça ao corpo
+        self.head.image.fill(self.configs['body_color'])
         self.body.append(self.head)
         self.head = new_head
 

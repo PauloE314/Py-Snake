@@ -19,13 +19,13 @@ class Fruit:
         # Gera posição aleatória
         # x
         self.rect.x = (randint(
-            configs['limits']['x'][0] + 5,
-            configs['limits']['x'][1] - 5
+            configs['limits']['x'][0] + 10,
+            configs['limits']['x'][1] - 10
         ) // configs['dimentions'][0]) * configs['dimentions'][0]
         # y
         self.rect.y = (randint(
-            configs['limits']['y'][0] + 5,
-            configs['limits']['y'][1] - 5
+            configs['limits']['y'][0] + 10,
+            configs['limits']['y'][1] - 10
         ) // configs['dimentions'][1]) * configs['dimentions'][1]
 
 

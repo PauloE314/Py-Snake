@@ -74,7 +74,7 @@ class TextManager:
         self.fonts[font_name] = new_font
         return new_font
 
-    def new_text(self, text: str, text_name: str, font_name: str, position: tuple, color: tuple):
+    def new_text(self, text: str = None, text_name: str = None, font_name: str = None, position: tuple = None, color: tuple = None):
         """
         Cria um novo texto
         """

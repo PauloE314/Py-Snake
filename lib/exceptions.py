@@ -24,3 +24,26 @@ class SnakeOutOfAxis(BaseException):
 
         if not axis:
             self.message = "A cobra está fora de um dos eixos"
+
+class StateDoesNotExist(BaseException):
+    """
+    Exception para um estado que não exista
+    """
+    def __init__(self, state_name: str = None):
+        self.message = f"O estado '{state_name}' não existe"
+
+class NextStateException(BaseException):
+    """
+    Exception para avançar para o próximo estado
+    """
+    def __init__(self, message = None):
+        assert message, "O próximo estado deve ter um nome"
+        self.message = message
+
+
+class EndGameException(BaseException):
+    """
+    Exception para terminar jogo
+    """
+    def __init__(self):
+        self.message = None

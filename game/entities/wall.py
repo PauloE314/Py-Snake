@@ -1,17 +1,6 @@
 import pygame
 from pygame import Surface
 from pygame.sprite import Sprite
-"""
-{
-    "DIMENTIONS": (X, Y),
-    "COLOR": (255, 255, 255),
-    "POSITION": (x, y)
-    "LIMITS": {
-        "x": (a, b),
-        "y": (c, d)
-    }
-}
-"""
 
 class Wall(Sprite):
     """
