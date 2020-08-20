@@ -1,4 +1,5 @@
 import pygame
+from random import choice
 from pygame.locals import *
 from pygame.surface import Surface
 from typing import List, Tuple
@@ -29,7 +30,7 @@ class Snake:
     """
     Classe da cobra
     """
-    __x_speed = -5
+    __x_speed = 0
     __y_speed = 0
     __default_speed = 0
     configs: dict = None
@@ -44,15 +45,20 @@ class Snake:
             (configs['initial_position'][0] // dimensions[0]) * dimensions[0],
             (configs['initial_position'][1] // dimensions[1]) * dimensions[1],
         )
-
+    
         self.configs = configs
+
         # Seta a velocidade
         self.__default_speed = configs['speed']
-        self.__x_speed = -self.__default_speed
-        self.__y_speed = 0
+
+        # Seta direção inicial
+        initial_direction = choice(("right", "left", "up", "down"))
+        self.move(initial_direction)
+
         # Cria a cabeça da cobra
         self.head = SnakeBody(configs, initial_position, head=True)
         self.head.image.fill(configs['head_color'])
+
         # Cria o corpo inicial da cobra
         self.body = []
         for i in range(initial_size):

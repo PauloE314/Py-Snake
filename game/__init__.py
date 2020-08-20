@@ -9,14 +9,6 @@ from game.entities.states.game_over import GameOver
 from settings import GAME_SETTINGS
 
 
-"""
-{
-    "font_size": 15,
-    "path": "...",
-    "font_name": "lorem"
-}
-"""
-
 class SnakeGame(BaseGame):
     """
     Jogo da cobrinha que todos amamos

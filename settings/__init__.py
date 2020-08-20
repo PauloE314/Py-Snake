@@ -35,6 +35,12 @@ GAME_SETTINGS = {
             "color": (255, 255, 255),
             "font": "small_font"
         },
+        "MAX_SCORE": {
+            "position": (WIDTH - 200, 20),
+            "color": (255, 255, 255),
+            "font": "small_font",
+            "path": os.path.join("game", "max_points.txt")
+        },
         "START_GAME_MESSAGE": {
             "position": (WIDTH // 2, HEIGHT // 2),
             "color": (150, 150, 150),
@@ -65,7 +71,7 @@ GAME_SETTINGS = {
     },
     "SNAKE": {
         "initial_position": (255, 255),
-        "initial_size": 3,
+        "initial_size": 2,
         "speed": GAME_BLOCK,
         "dimensions": (GAME_BLOCK, GAME_BLOCK),
         "body_color": (255, 255, 255),
