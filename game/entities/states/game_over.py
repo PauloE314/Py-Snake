@@ -7,7 +7,7 @@ from lib.text_manager import Text
 from game.entities.fruit import Fruit
 from game.entities.wall import Wall
 from game.entities.snake import Snake
-
+import time
 
 
 class GameOver(BaseGameState):
@@ -51,10 +51,25 @@ class GameOver(BaseGameState):
         # Renderiza texto de tentar novamente
         self.try_again_text.render(screen)
 
-    def events(self, event):
+    def events(self, event, screen):
         # Caso o usuário aperte ENTER
         if event.type == KEYDOWN:
             # Tenta novamente
-            if event.key == K_RETURN:
-                self.change_state('playing')
+            if event.key == K_RETURN:                
+                 # Atualiza botão de menu
+                start_message_configs = self.configs['TEXTS']['TRY_AGAIN']
+                self.try_again_text.update(color=start_message_configs['high-color'])
+                self.try_again_text.render(screen)
+
+                # Atualiza tela
+                pygame.display.update()
+
+                # Toca a música
+                self.audio_manager.play("start_game")
+                
+                # Espera música acabar
+                time.sleep(0.5)
+
+                # Começa o jogo
+                self.change_state('playing')        
         

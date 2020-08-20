@@ -1,6 +1,7 @@
 import pygame
 from lib.exceptions import NextStateException, EndGameException
 from lib.text_manager import TextManager
+from lib.audio_manager import AudioManager
 
 class BaseGameState:
     """
@@ -9,12 +10,14 @@ class BaseGameState:
     name: str = None
     configs: dict = None
     text_manager: TextManager = None
+    audio_manager: AudioManager = None
     
 
-    def __init__(self, game_configs: dict, text_manager: TextManager):
+    def __init__(self, game_configs: dict, text_manager: TextManager, audio_manager: AudioManager):
         # Armazena configurações
         self.configs = game_configs
         self.text_manager = text_manager
+        self.audio_manager = audio_manager
         
 
     def setup(self) -> None:
@@ -33,7 +36,7 @@ class BaseGameState:
         assert False, "A lógica precisa ser sobrescrito"
 
 
-    def events(self, event) -> None:
+    def events(self, event, screen) -> None:
         """
         Event handler do estado do jogo
         """

@@ -95,7 +95,7 @@ class PlayingState(BaseGameState):
         self.snake.update()
 
 
-    def events(self, event):
+    def events(self, event, screen):
         # envia os eventos para a cobra
         self.snake.events(event)
         

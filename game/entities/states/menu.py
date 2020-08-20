@@ -7,6 +7,8 @@ from lib.text_manager import Text
 from game.entities.fruit import Fruit
 from game.entities.wall import Wall
 from game.entities.snake import Snake
+import time
+
 
 class Menu(BaseGameState):
     """
@@ -52,10 +54,23 @@ class Menu(BaseGameState):
         self.start_game.render(screen)
 
 
-    def events(self, event):
+    def events(self, event, screen):
         # Caso o usuário aperte ENTER, começa o jogo
         if event.type == KEYDOWN:
             if event.key == K_RETURN:
-                self.change_state('playing')
+                # Atualiza botão de menu
+                start_message_configs = self.configs['TEXTS']['START_GAME_MESSAGE']
+                self.start_game.update(color=start_message_configs['high-color'])
+                self.start_game.render(screen)
 
-        
+                # Atualiza tela
+                pygame.display.update()
+
+                # Toca a música
+                self.audio_manager.play("start_game")
+                
+                # Espera música acabar
+                time.sleep(0.5)
+
+                # Começa o jogo
+                self.change_state('playing')        

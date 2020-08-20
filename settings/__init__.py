@@ -44,6 +44,7 @@ GAME_SETTINGS = {
         "START_GAME_MESSAGE": {
             "position": (WIDTH // 2, HEIGHT // 2),
             "color": (150, 150, 150),
+            "high-color": (255, 255, 255),
             "font": "small_font"            
         },
         "GAME_OVER": {
@@ -54,8 +55,14 @@ GAME_SETTINGS = {
         "TRY_AGAIN": {
             "position": (WIDTH // 2, HEIGHT // 2),
             "color": (150, 150, 150),
+            "high-color": (255, 255, 255),
             "font": "small_font"
         }
+    },
+    "SONGS": {
+        "start_game": os.path.join('resources', 'songs', 'Start Game.wav'),
+        # "add_point": "",
+        # "game_over": "",
     },
     "GAME_LIMITS": {
         "x": (100, WIDTH - 100),
@@ -76,5 +83,5 @@ GAME_SETTINGS = {
         "dimensions": (GAME_BLOCK, GAME_BLOCK),
         "body_color": (255, 255, 255),
         "head_color": (255, 255, 100)
-    }
+    },
 }

@@ -5,6 +5,7 @@ from pygame.time import Clock
 from pygame.locals import *
 from lib.exceptions import FontNameError, FontNotFoundError, StateDoesNotExist, NextStateException, EndGameException
 from lib.text_manager import TextManager
+from lib.audio_manager import AudioManager
 from lib.game_state import BaseGameState
 
 class BaseGame:
@@ -26,23 +27,37 @@ class BaseGame:
     __fps: int = None
     # Text manager
     text_manager: TextManager = None
+    # Gerenciador de áudio
+    audio_manger: AudioManager = None
 
 
     def __init__(self, configs):
         """
         Inicia a aplicação
         """
+         # Inicia o Jogo
+        pygame.init()
+
+        # Inicia áudio
+        pygame.mixer.init()
+        
         # Configurações de tempo
         self.clock = Clock()
         self.__fps = configs['FPS']
+
         # Configuração de tela
         self.screen = pygame.display.set_mode(configs["DIMENSIONS"])
+
         # Salva configurações
         self.configs = configs
+
         # Configurações de texto
         self.text_manager = TextManager()
-        # Inicia o Jogo
-        pygame.init()
+
+        # Configurações de áudio
+        self.audio_manger = AudioManager(configs["SONGS"])
+    
+
 
 
     def setup(self) -> Any:
@@ -63,7 +78,7 @@ class BaseGame:
         
         # Carrega os estados do jogo
         self.__real_state_list = list(
-            map(lambda cls: cls(self.configs, self.text_manager), self.states)
+            map(lambda cls: cls(self.configs, self.text_manager, self.audio_manger), self.states)
         )
         
         # Pega o estado atual
@@ -85,7 +100,7 @@ class BaseGame:
                             self.end_game()
                             return
                         # Executa o event handler do estado atual
-                        self.__current_state.events(event)
+                        self.__current_state.events(event, self.screen)
 
                     # Função principal
                     self.__current_state.main()
