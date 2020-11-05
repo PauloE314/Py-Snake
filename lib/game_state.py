@@ -3,6 +3,7 @@ from lib.exceptions import NextStateException, EndGameException
 from lib.text_manager import TextManager
 from lib.audio_manager import AudioManager
 
+
 class BaseGameState:
     """
     Classe para um estado base do jogo
@@ -11,14 +12,12 @@ class BaseGameState:
     configs: dict = None
     text_manager: TextManager = None
     audio_manager: AudioManager = None
-    
 
     def __init__(self, game_configs: dict, text_manager: TextManager, audio_manager: AudioManager):
         # Armazena configurações
         self.configs = game_configs
         self.text_manager = text_manager
         self.audio_manager = audio_manager
-        
 
     def setup(self) -> None:
         """
@@ -28,13 +27,11 @@ class BaseGameState:
         # Checa se o estado possui um nome
         assert name, "Todo estado precisa de um nome"
 
-
     def main(self) -> None:
         """
         Método de lógica principal do estado do jogo
         """
         assert False, "A lógica precisa ser sobrescrito"
-
 
     def events(self, event, screen) -> None:
         """
@@ -42,13 +39,11 @@ class BaseGameState:
         """
         assert False, "O event handler precisa ser sobrescrito"
 
-
     def render(self) -> None:
         """
         Renderiza os items da tela
         """
         assert False, "O método render deve ser sobrescrito"
-
 
     def change_state(self, state_name: str):
         """

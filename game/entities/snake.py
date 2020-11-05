@@ -26,6 +26,7 @@ class SnakeBody:
     def __repr__(self):
         return f"<Snake Body [x: {self.rect.x}, y: {self.rect.y}]>"
 
+
 class Snake:
     """
     Classe da cobra
@@ -45,7 +46,7 @@ class Snake:
             (configs['initial_position'][0] // dimensions[0]) * dimensions[0],
             (configs['initial_position'][1] // dimensions[1]) * dimensions[1],
         )
-    
+
         self.configs = configs
 
         # Seta a velocidade
@@ -64,11 +65,9 @@ class Snake:
         for i in range(initial_size):
             self.increase()
 
-
     def update(self):
         # pass
         self.walk()
-
 
     def events(self, event):
         """
@@ -87,7 +86,6 @@ class Snake:
             elif event.key == K_s:
                 self.move('down')
 
-
     def increase(self):
         """
         Aumenta o camanho da cobra
@@ -97,10 +95,12 @@ class Snake:
         # Certifica que a cobra está em um dos eixos
         if self.__x_speed and self.__y_speed:
             raise SnakeOutOfAxis()
-        
-        x_diff = ball_width if self.__x_speed > 0 else (-ball_width if self.__x_speed < 0 else 0)
-        y_diff = ball_height if self.__y_speed > 0 else (-ball_height if self.__y_speed < 0 else 0)       
- 
+
+        x_diff = ball_width if self.__x_speed > 0 else (
+            -ball_width if self.__x_speed < 0 else 0)
+        y_diff = ball_height if self.__y_speed > 0 else (
+            -ball_height if self.__y_speed < 0 else 0)
+
         # Cria uma nova cabeça
         new_head = SnakeBody(
             self.configs, (self.head.rect.x + x_diff, self.head.rect.y + y_diff), head=True
@@ -110,7 +110,6 @@ class Snake:
         self.head.image.fill(self.configs['body_color'])
         self.body.append(self.head)
         self.head = new_head
-
 
     def set_speed(self, x: int, y: int):
         """
@@ -125,7 +124,6 @@ class Snake:
         if not (self.__y_speed > 0 and y < 0 or self.__y_speed < 0 and y > 0):
             self.__y_speed = y
 
-
     def walk(self):
         """
         Move a cobra
@@ -134,7 +132,7 @@ class Snake:
         body_len = len(self.body)
         for index in range(body_len):
             # Não atualiza o ultimo corpinho dentro do ciclo
-            if index + 1 != body_len:  
+            if index + 1 != body_len:
                 self.body[index].rect.x = self.body[index + 1].rect.x
                 self.body[index].rect.y = self.body[index + 1].rect.y
         # Atualiza o ultimo corpinho
@@ -144,7 +142,6 @@ class Snake:
         # Move a cabeça
         self.head.rect.x += self.__x_speed
         self.head.rect.y += self.__y_speed
-        
 
     def move(self, direction: str):
         """
@@ -152,16 +149,16 @@ class Snake:
         """
         # Direita
         if (direction == 'right'):
-            self.set_speed(x = self.__default_speed, y = 0)
+            self.set_speed(x=self.__default_speed, y=0)
         # Cima
         elif (direction == 'up'):
-            self.set_speed(x = 0, y = -self.__default_speed)
+            self.set_speed(x=0, y=-self.__default_speed)
         # Esquerda
         elif (direction == 'left'):
-            self.set_speed(x = -self.__default_speed, y = 0)
+            self.set_speed(x=-self.__default_speed, y=0)
         # Baixo
         elif (direction == 'down'):
-            self.set_speed(x = 0, y = self.__default_speed)
+            self.set_speed(x=0, y=self.__default_speed)
 
     def draw(self, surface: Surface):
         """
@@ -172,7 +169,6 @@ class Snake:
         # # Renderiza o corpo
         for ball in reversed(self.body):
             surface.blit(ball.image, ball.rect)
-
 
     @property
     def body_rect(self):
